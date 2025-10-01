@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  tg-contacts:
+    # 1. Сборка (Build)
+    # Указываем Docker Compose, что нужно собрать образ
+    # 'context: .' означает, что Dockerfile находится в той же директории
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # 2. Имя образа (Image Name)
+    # Назначим понятное имя для созданного образа
+    image: tg-contacts:latest
+
+    # 3. Перезапуск (Restart Policy)
+    # Бот будет автоматически перезапущен, если он упадет
+    restart: always
+
+    # 4. Переменные окружения (Environment Variables)
+    # Это КРИТИЧЕСКИ важный шаг для вашего токена и других секретов!
+    # Предполагается, что у вас есть файл .env на хосте,
+    # который Compose автоматически загрузит и передаст в контейнер.
+    env_file:
+      - .env
